@@ -1,4 +1,4 @@
-import type { ButtonHTMLAttributes, InputHTMLAttributes, ReactNode } from "react";
+import type { ButtonHTMLAttributes, InputHTMLAttributes, ReactNode, SelectHTMLAttributes } from "react";
 
 export function cn(...classes: Array<string | false | null | undefined>) { return classes.filter(Boolean).join(" "); }
 
@@ -14,4 +14,5 @@ export function Button({ className, size = "md", variant = "default", ...props }
   return <button {...props} className={cn("inline-flex items-center justify-center gap-2 rounded-md px-4 font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-50", variant === "default" && "bg-pine text-cream hover:bg-pine-deep", variant === "gold" && "bg-gold text-ink hover:bg-gold/90", size === "sm" && "h-9 text-[12px]", size === "md" && "h-10 text-[13px]", size === "lg" && "h-12 text-[14px]", className)} />;
 }
 export function Input({ className, ...props }: InputHTMLAttributes<HTMLInputElement>) { return <input {...props} className={cn("h-11 w-full rounded-md border border-line bg-card px-3 text-[13.5px] text-ink outline-none placeholder:text-ink-3 focus:border-pine/50 focus:ring-2 focus:ring-pine/10", className)} />; }
+export function Select({ className, ...props }: SelectHTMLAttributes<HTMLSelectElement>) { return <select {...props} className={cn("h-11 w-full rounded-md border border-line bg-card px-3 text-[13.5px] text-ink outline-none focus:border-pine/50 focus:ring-2 focus:ring-pine/10", className)} />; }
 export function Field({ label, children, className }: { label: string; children: ReactNode; className?: string }) { return <label className={cn("block", className)}><span className="mb-1.5 block text-[12px] font-medium text-ink-2">{label}</span>{children}</label>; }
