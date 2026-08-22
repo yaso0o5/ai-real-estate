@@ -15,7 +15,7 @@ export function useFetch<T = unknown>(url: string, options?: RequestInit, deps: 
   const [loading, setLoading] = useState(true);
   const controllerRef = useRef<AbortController | null>(null);
 
-  const refetch = useCallback(async () => {
+  const reload = useCallback(async () => {
     controllerRef.current?.abort();
     const controller = new AbortController();
     controllerRef.current = controller;
@@ -38,10 +38,10 @@ export function useFetch<T = unknown>(url: string, options?: RequestInit, deps: 
   }, [url, options]);
 
   useEffect(() => {
-    refetch();
+    reload();
     return () => controllerRef.current?.abort();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [url, ...deps]);
 
-  return { data, error, loading, refetch };
+  return { data, error, loading, reload, refetch: reload };
 }
