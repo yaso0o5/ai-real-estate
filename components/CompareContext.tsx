@@ -6,6 +6,7 @@ type CompareContextValue = {
   ids: string[];
   add: (id: string) => void;
   remove: (id: string) => void;
+  toggle: (id: string) => void;
   clear: () => void;
   has: (id: string) => boolean;
 };
@@ -18,6 +19,7 @@ export function CompareProvider({ children }: { children: ReactNode }) {
     ids,
     add: (id: string) => setIds(v => v.includes(id) ? v : [...v, id]),
     remove: (id: string) => setIds(v => v.filter(x => x !== id)),
+    toggle: (id: string) => setIds(v => v.includes(id) ? v.filter(x => x !== id) : [...v, id]),
     clear: () => setIds([]),
     has: (id: string) => ids.includes(id),
   }), [ids]);
